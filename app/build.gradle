@@ -32,8 +32,8 @@ android {
 }
 
 dependencies {
-    // Указываем Gradle брать библиотеку Xposed прямо из локальной папки libs
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
 }
+
 
 
