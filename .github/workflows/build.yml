@@ -24,8 +24,22 @@ jobs:
       with:
         gradle-version: '8.2.1'
 
+    - name: Compile Local Xposed API
+      run: |
+        mkdir -p app/libs/de/robv/android/xposed/callbacks
+        
+        # Создаем файлы исходного кода Xposed
+        echo "package de.robv.android.xposed; public interface IXposedHookLoadPackage { void handleLoadPackage(callbacks.XC_LoadPackage.LoadPackageParam lpparam) throws Throwable; }" > app/libs/de/robv/android/xposed/IXposedHookLoadPackage.java
+        echo "package de.robv.android.xposed; import java.lang.reflect.Method; public class XposedHelpers { public static abstract class MethodHook { protected void beforeHookedMethod(MethodHookParam param) throws Throwable {} protected void afterHookedMethod(MethodHookParam param) throws Throwable {} } public static class MethodHookParam { public Object[] args; public Object getResult() { return null; } public void setResult(Object result) {} } public static Object findAndHookMethod(Class<?> clazz, String methodName, Object... parameterTypesAndCallback) { return null; } }" > app/libs/de/robv/android/xposed/XposedHelpers.java
+        echo "package de.robv.android.xposed.callbacks; public class XC_LoadPackage { public static class LoadPackageParam { public String packageName; public ClassLoader classLoader; } }" > app/libs/de/robv/android/xposed/callbacks/XC_LoadPackage.java
+        
+        # Компилируем их в .class файлы и упаковываем в .jar
+        javac app/libs/de/robv/android/xposed/*.java app/libs/de/robv/android/xposed/callbacks/*.java
+        jar cf app/libs/api.jar -C app/libs de
+        rm -rf app/libs/de
+
     - name: Build with Gradle
-      run: gradle assembleDebug --no-daemon
+      run: gradle assembleDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
