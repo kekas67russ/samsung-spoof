@@ -20,9 +20,6 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Set up Android SDK
-      uses: android-actions/setup-android@v3
-
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
 
@@ -35,3 +32,4 @@ jobs:
         name: wcsspoof-apk
         path: app/build/outputs/apk/debug/*.apk
         if-no-files-found: error
+        
