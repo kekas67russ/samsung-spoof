@@ -31,12 +31,8 @@ android {
     }
 }
 
-repositories {
-    google()
-    mavenCentral()
-    maven { url 'https://xposed.info' }
-}
-
 dependencies {
+    // Xposed/LSPosed API — provided by the framework at runtime on-device,
+    // only needed here at compile time.
     compileOnly 'de.robv.android.xposed:api:82'
 }
