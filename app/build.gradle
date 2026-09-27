@@ -37,8 +37,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'com.ghgande:j2mod:3.1.1'
-    compileOnly 'ch.acra:acra-core:5.11.3'
-    compileOnly 'com.bugsnag:bugsnag-android:6.1.0'
+    compileOnly 'com.github.bmaxwell:XposedBridge:v82'
 }
+
 
