@@ -39,7 +39,9 @@ repositories {
 
 
 dependencies {
-    compileOnly 'com.github.bmaxwell:XposedBridge:v82'
+    // Вечный и открытый архив классов Xposed API на сервере MavenCentral
+    compileOnly 'de.robv.android.xposed:api:82'
 }
+
 
 
