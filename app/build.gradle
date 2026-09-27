@@ -34,7 +34,9 @@ android {
 repositories {
     google()
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
+
 
 dependencies {
     compileOnly 'com.github.bmaxwell:XposedBridge:v82'
