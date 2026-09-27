@@ -31,12 +31,6 @@ android {
     }
 }
 
-repositories {
-    google()
-    mavenCentral()
-    jcenter() 
-}
-
 dependencies {
-    compileOnly 'de.robv.android.xposed:api:82'
+    compileOnly 'com.github.Status_m:XposedBridge:102'
 }
