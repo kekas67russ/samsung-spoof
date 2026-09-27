@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
-    compileOnly 'id.co.gits:xp-bridge:1.0.1'
+    // Указываем Gradle брать библиотеку Xposed прямо из локальной папки libs
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
 }
+
 
