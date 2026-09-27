@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gorba.wcsspoof">
+
+    <application
+        android:label="WCS Vendor Spoof (watchuniteplugin only)"
+        android:allowBackup="false">
+
+        <!-- Marks this APK as an Xposed/LSPosed module -->
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="Spoofs Build.BRAND/MANUFACTURER to 'samsung' only inside com.samsung.wearable.watchuniteplugin, so its Wear capability-exchange message reports a Samsung vendor to the paired watch." />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="93" />
+
+    </application>
+
+</manifest>
