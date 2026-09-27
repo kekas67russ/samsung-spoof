@@ -39,9 +39,9 @@ repositories {
 
 
 dependencies {
-    // Вечный и открытый архив классов Xposed API на сервере MavenCentral
-    compileOnly 'de.robv.android.xposed:api:82'
+    compileOnly files('libs/api.jar')
 }
+
 
 
 
