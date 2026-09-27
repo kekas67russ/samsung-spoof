@@ -28,13 +28,16 @@ jobs:
       run: |
         mkdir -p app/libs/de/robv/android/xposed/callbacks
         
-        # Создаем файлы исходного кода Xposed
-        echo "package de.robv.android.xposed; public interface IXposedHookLoadPackage { void handleLoadPackage(callbacks.XC_LoadPackage.LoadPackageParam lpparam) throws Throwable; }" > app/libs/de/robv/android/xposed/IXposedHookLoadPackage.java
-        echo "package de.robv.android.xposed; import java.lang.reflect.Method; public class XposedHelpers { public static abstract class MethodHook { protected void beforeHookedMethod(MethodHookParam param) throws Throwable {} protected void afterHookedMethod(MethodHookParam param) throws Throwable {} } public static class MethodHookParam { public Object[] args; public Object getResult() { return null; } public void setResult(Object result) {} } public static Object findAndHookMethod(Class<?> clazz, String methodName, Object... parameterTypesAndCallback) { return null; } }" > app/libs/de/robv/android/xposed/XposedHelpers.java
+        # 1. Сначала создаем и компилируем базовый пакет callbacks
         echo "package de.robv.android.xposed.callbacks; public class XC_LoadPackage { public static class LoadPackageParam { public String packageName; public ClassLoader classLoader; } }" > app/libs/de/robv/android/xposed/callbacks/XC_LoadPackage.java
+        javac app/libs/de/robv/android/xposed/callbacks/XC_LoadPackage.java
         
-        # Компилируем их в .class файлы и упаковываем в .jar
-        javac app/libs/de/robv/android/xposed/*.java app/libs/de/robv/android/xposed/callbacks/*.java
+        # 2. Теперь создаем интерфейсы главного пакета, использующие callbacks
+        echo "package de.robv.android.xposed; public interface IXposedHookLoadPackage { void handleLoadPackage(de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam lpparam) throws Throwable; }" > app/libs/de/robv/android/xposed/IXposedHookLoadPackage.java
+        echo "package de.robv.android.xposed; import java.lang.reflect.Method; public class XposedHelpers { public static abstract class MethodHook { protected void beforeHookedMethod(MethodHookParam param) throws Throwable {} protected void afterHookedMethod(MethodHookParam param) throws Throwable {} } public static class MethodHookParam { public Object[] args; public Object getResult() { return null; } public void setResult(Object result) {} } public static Object findAndHookMethod(Class<?> clazz, String methodName, Object... parameterTypesAndCallback) { return null; } }" > app/libs/de/robv/android/xposed/XposedHelpers.java
+        
+        # 3. Докомпилируем оставшиеся файлы и пакуем всё в один архив api.jar
+        javac -cp app/libs app/libs/de/robv/android/xposed/*.java
         jar cf app/libs/api.jar -C app/libs de
         rm -rf app/libs/de
 
