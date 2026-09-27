@@ -3,7 +3,7 @@
     package="com.gorba.wcsspoof">
 
     <application
-        android:label="WCS Vendor Spoof (watchuniteplugin only)"
+        android:label="WCS Vendor Spoof (watchuniteplugin only) 2"
         android:allowBackup="false">
 
         <!-- Marks this APK as an Xposed/LSPosed module -->
