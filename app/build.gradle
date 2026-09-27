@@ -37,5 +37,8 @@ repositories {
 }
 
 dependencies {
-    // Внешние зависимости полностью отключены, чтобы сборка не падала
+    compileOnly 'com.ghgande:j2mod:3.1.1'
+    compileOnly 'ch.acra:acra-core:5.11.3'
+    compileOnly 'com.bugsnag:bugsnag-android:6.1.0'
 }
+
